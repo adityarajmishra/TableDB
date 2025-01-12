@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.tabledb.core'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'com.tabledb.core.App'
+}
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+
+
+
+tasks.register('runTests', Test) {
+    def testCaseCounter = 1;
+    doFirst {
+        if (!project.hasProperty('case')) {
+            throw new GradleException("\u001B[31mPlease provide the '-Pcase' parameter. Usage: gradle runTests -Pcase=YourCase\u001B[0m")
+        }
+        def caseValue = project.property('case')
+        useJUnitPlatform()
+
+
+
+
+        include "com/tabledb/core/AppIntegration${caseValue}Test.class"
+        testLogging {
+            events "passed", "skipped", "failed"
+            showStandardStreams = true
+            showExceptions = false
+        }
+        beforeTest { descriptor ->
+            println "_________________________________________________________________"
+            println "\n===Running test ${testCaseCounter}: ${descriptor.name}==="
+        }
+        afterTest { descriptor, result ->
+            if (result.resultType == TestResult.ResultType.FAILURE) {
+                //Print in Red
+                println "\u001B[31mTest ${testCaseCounter++} failed\u001B[0m"
+                println result.exception.message
+
+
+
+
+            } else if (result.resultType == TestResult.ResultType.SUCCESS) {
+                println "Test ${testCaseCounter++} passed"
+            }
+        }
+    }
+}
