@@ -264,13 +264,6 @@ DB_PERSIST_PATH=/data/db  # Data persistence location
 
 5\. Create a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Authors
-
-- Your Name - Initial work - [YourGithub](https://github.com/yourusername)
 
 ## 🙏 Acknowledgments
 
@@ -279,18 +272,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with modern Java practices
 
 - Uses industry-standard design patterns
-
-## 📚 Documentation
-
-Full documentation is available in the code and includes:
-
-- Comprehensive JavaDoc
-
-- Code examples
-
-- Design patterns used
-
-- Performance considerations
 
 ## 🐛 Bug Reporting
 
